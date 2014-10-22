@@ -1,5 +1,7 @@
 var module = angular.module('slider-demo', ['famous.angular']);
 
+//This is pretty hacky code.
+//Was built just to demo a point (expressiveness of imperative animations)
 module.controller('SliderCtrl', function($scope, $famous, $timeout, $timeline){
   var Transitionable = $famous['famous/transitions/Transitionable'];
   var Transform = $famous['famous/core/Transform'];
@@ -33,8 +35,12 @@ module.controller('SliderCtrl', function($scope, $famous, $timeout, $timeline){
   var COLORS = ["#b58900","#cb4b16","#dc322f","#d33682","#6c71c4","#268bd2","#2aa198","#859900"]
 
   $scope.bars = [
-    1,2,3,4,5,6
+    1,2,3,4,5,6,7,8
   ];
+
+  $scope.getTextOpacity = function(){
+    return Easing.inQuad(t.get());
+  }
 
   $scope.getTranslate = function(bar, index){
     var x = $scope.getSize()[0] * index;
@@ -47,7 +53,7 @@ module.controller('SliderCtrl', function($scope, $famous, $timeout, $timeline){
 
     return $timeline([
       [0, [1, 0, 1]],
-      [startDomain, [1, 0, 1], Easing.inOutBounce],
+      [startDomain, [1, 0, 1], Easing.inQuad],
       [1, [1, 1, 1]]
     ])(t.get());
   };
@@ -72,7 +78,7 @@ module.controller('SliderCtrl', function($scope, $famous, $timeout, $timeline){
     _draggable.sync.on('end', function(){
       var rest = [0,0];
       var tRest = 0;
-      var transition = {duration: 650, curve: Easing.outBounce};
+      var transition = {duration: 750, curve: Easing.outBounce};
       if(_draggable._positionState.get()[0] > $scope.getContainerWidth() / 2){
         rest = [$scope.getContainerWidth() - 10, 0];
         tRest = 1;

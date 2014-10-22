@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-    <title>Famo.us/Angular:  </title>
+    <title>Famo.us/Angular:  High Performance JavaScript Animations for a More Interactive Web</title>
 
 		<meta name="description" content="Famo.us/Angular slide deck presented by Zack Brown from Thomas Street at ng-europe">
 		<meta name="author" content="Zack Brown">
@@ -72,7 +72,7 @@
 			<div class="slides">
 				<section>
 					<h1>Famo.us/Angular</h1>
-					<h4 style="margin-top: 20px;">Animate Imperatively for a More Interactive Web</h4>
+					<h4 style="margin-top: 20px;">High Performance JavaScript Animations for a More Interactive Web</h4>
 					<p style="margin-top: 280px;">            <a href="https://github.com/Famous/famous-angular">https://github.com/Famous/famous-angular</a>
           </p>
           <p>
@@ -83,7 +83,7 @@
 				</section>
 
 				<section>
-					<h2>Expectations</h2>
+					<h2>User Experience Expectations</h2>
 					<div class='slide-content'>
             <div class="row">
   						<div class="col-xs-3">
@@ -132,6 +132,26 @@
           </div>
 						
 				</section>
+
+
+        <section>
+          <h2>Why hasn't Web taken over the (native) world?</h2>
+          <div class='row slide-content'>
+            <div class="col-xs-6" style="margin-top: 100px;">
+              <h4>A few barriers:</h4>
+              <ul>
+                <li>Performance
+                <br><small style="color: #449444">This is getting better</small></li>
+                <li>Ease of wrapping<br><small style="color: #449444">This is getting better</small></li>
+                <li>Rich Interactivity<br><small style="color: #944444">CSS falls short<br> JavaScript traditionally sacrifices performance</small></li>
+              </ul>
+            </div>
+            <div class="col-xs-6">
+              <img src="img/keep-calm-and-take-over-the-world.png" style="height: 500px;" />
+              <p><small><em>keepcalm-o-matic.co.uk</em></small></p>
+            </div>
+          </div>
+        </section>
 
 
 				<section>
@@ -268,15 +288,15 @@
                   </code>
                 </pre>
                 <p style="margin-top: -30px;">
-                <small>(Verbose) declarative CSS from a CSS animation generator (cssanimate.com)</small>
+                  <small>(Verbose) declarative CSS from a CSS animation generator (cssanimate.com)</small>
                 </p>
             </div>
+          </div>
 				</section>
 
 
-
         <section>
-          <h2>CSS vs. Rich Animations</h2>
+          <h2>Pure CSS's Challenges with Rich Animations</h2>
           <div class='row slide-content'>
             <div class="col-xs-6">
               <h4>What's hard?</h4>
@@ -287,62 +307,57 @@
               </ul>
             </div>
             <div class="col-xs-6">
-              <h4>What's impossible?</h4>
+              <h4>What's (essentially) impossible?</h4>
               <ul>
                 <li>Conditions, control flow</li>
                 <li>Non-determinism, randomness</li>
                 <li>Mathematical operations, computed physics</li>
                 <li>Responding to non-trivial user input (e.g. touch position)</li>
-                <li><strong>All of these are begging for Turing-completeness that CSS simply doesn't offer.</strong><br><br><small>(nor should it! we have JavaScript.)</small></li>
+                <li><strong>All of these are begging for Turing-completeness (i.e. full programmatic expressiveness) that CSS simply doesn't offer.</strong></li>
               </ul>
             </div>
           </div>
         </section>  
 
-				<section>
-					<h2>Use the Best Tool for the Job</h2>
-					<div class='row slide-content'>
-						<div class="col-xs-6">
-							<ul>
-								<li></li>
-								<li>The present-day landscape of mobile apps has spoiled users into expecting richly responsive experiences.</li>
-								<li>Famo.us lets you design and build apps in the browser as if you were building for a mobile device.</li>
-							</ul>
-						</div>
-						<div class="col-xs-6">
-							<pre class="no-border">
-								<code>
-var sync = new GenericSync({
-    "mouse"  : {},
-    "touch"  : {},
-    "scroll" : {scale : .5}
-});
-
-sync.on('update', function(data){
-    var currentPosition = position.get();
-    position.set([
-        currentPosition[0] + data.delta[0],
-        currentPosition[1] + data.delta[1]
-    ]);
-});	
-								</code>
-							</pre>
-							<p><small><em>From <a href="http://famo.us/university/famous-102/input/5/">http://famo.us/university/famous-102/input/5/</a></em></small></p>
-						</div>
-					</div>
-				</section>
 
         <section>
+          <h2>Traditional JS's Challenges with Rich Animations:</h2>
+          <div class='row slide-content'>
+            <div class="col-xs-12">
+              <h3 style="color: #FFFFFA">Performance.</h3>
+              <h5 style="color: #FFFFFA" class="fragment">Especially on mobile.</h5>
+            </div>
+          </div>
+        </section>
+
+
+        <section>
+          <h4>Bold Claim</h4>
           <div  ng-app="slider-demo" class="row slide-content">
             <fa-app id="slider-app" style="height: 500px;" ng-controller="SliderCtrl">
 
               <fa-modifier fa-size="[getDragPosition()[0], undefined]">
-                <fa-container-surface fa-options="{properties: {overflow: 'hidden'}}">
-                  <fa-modifier fa-size="[getContainerWidth(), undefined]">
+                <fa-container-surface fa-options="{properties: {overflow: 'hidden', transformStyle: 'preserve-3d', '-webkit-transform-style': 'preserve-3d'}}">
+
+
+                  <fa-modifier fa-size="[getContainerWidth(), undefined]" >
+
+                    <fa-modifier fa-origin="[.5, .5]" fa-align="[.5, 1]" fa-opacity="getTextOpacity()" fa-translate="[0, -50, 1000]">
+                      <fa-surface fa-z-index="100" size="[300, true]">
+                        <div style="color: white; text-align: center; font-weight: 600; padding: 10px 50px;">
+                          Rich interactions&mdash;which users expect from today's mobile apps&mdash;are fundamentally better suited to <strong>imperative</strong> than to <strong>declarative</strong> animations.
+                        </div>
+                      </fa-surface>
+                    </fa-modifier>
+                    
                     <fa-modifier ng-repeat="bar in bars" fa-translate="getTranslate(bar, $index)" 
                     fa-size="getSize(bar, $index)" fa-origin="getOrigin($index)" fa-align="getOrigin($index)" fa-scale="getScale(bar, $index)">
                       <fa-surface fa-background-color="getBackgroundColor(bar, $index)"></fa-surface>
                     </fa-modifier>
+
+
+
+                    
                   </fa-modifier>
                 </fa-container-surface>
               </fa-modifier>
@@ -353,21 +368,22 @@ sync.on('update', function(data){
                 <fa-surface fa-pipe-to="scrollHandler" fa-size="[10, undefined]" fa-background-color="'#666666'">
                 </fa-surface>
               </fa-draggable>
-              <!-- </fa-modifier> -->
             </fa-app>
           </div>
         </section> 
 
 				<section>
-					<h2>So how does Famo.us work?</h2>
+					<h2>If only there were a way to make JS animations performant...</h2>
 					<div class='row slide-content'>
 						<div class="col-xs-6">
+              <h3>Enter: Famo.us</h3>
 							<ul>
-								<li>Instead of keeping track of content with the DOM, Famo.us keeps track of its own representation of its render tree, using a data structure called a scene graph</li>
-								<li>Scene graphs are commonly used in 3D platforms like OpenGL or DirectX, but are not common in the traditional web world.</li>
+								<li>Famo.us's core value proposition is cross-platform, high-performance, JavaScript-driven animations.</li>
+								<li>With the ability to achieve 60FPS animations across devices using JavaScript, we can finally knock out that final barrier to Web-World-Domination: Rich Interactivity</li>
 							</ul>
 						</div>
-						<div class="col-xs-6">
+						<div class="col-xs-6 fragment">
+              <h3>
 							<img src="img/scene-graph.png" style="height: 500px;" />
 							<p><small><em>Scene graph</em></small></p>
 						</div>
@@ -427,7 +443,7 @@ sync.on('update', function(data){
 				</section>
 
 
-				<!-- <section>
+				<section>
 					<h2>A quick bit of history</h2>
 					<div class='row slide-content'>
 						<div class="col-xs-12">
@@ -441,7 +457,7 @@ sync.on('update', function(data){
 						</div>
 					</div>
 				</section>
- -->
+ 
 
 				<section>
 					<h2>So what would an ideal integration look like?</h2>
@@ -460,195 +476,6 @@ sync.on('update', function(data){
 				</section>
 
 
-				<section>
-					<h2>And how to get started?</h2>
-					<div class='row slide-content'>
-						<div class="col-xs-12">
-							<ul>
-								<li>Our first clue was the observation that Famo.us’s RenderTree is simply that—a tree, just like the DOM</li>
-								<li>Instead of trying to get both frameworks to live in the same space, simultaneously trying to manipulate the same DOM elements, what if we introduced a compilation step?</li>
-								<li>Angular is already a DOM compiler (directives.)  The tricky piece is communicating the structure of the DOM—its hierarchy—to Famo.us.</li>
-							</ul>
-						</div>
-					</div>
-				</section>
-
-
-				<section>
-					<h2>Communicating hierarchy</h2>
-					<div class='row slide-content'>
-						<div class="col-xs-6" style="font-size: 30px;">
-							<ul>
-								<li>Angular maintains a hierarchy of child scopes, which maps to the hierarchy of directives in the DOM.</li>
-								<li>This scope hierarchy is what we decided to tranform into the Famo.us render tree hierarchy</li>
-								<li>The way we solved this was with eventing:  every child sends an event to its parent.  As the scope hierarchy is traversed with these events, the directives string the corresponding Famo.us components together.</li>
-							</ul>
-						</div>
-						<div class="col-xs-6">
-							<img src="img/scopes.png" />
-							<em><small>Angular Scope Hierarchy (from Batarang)</small></em>
-						</div>
-					</div>
-				</section>
-
-
-        <section>
-          <h3>Communicating hierarchy (cont.)</h3>
-          <div class='row slide-content'>
-            <div class="col-xs-6" style="font-size: 30px;">
-              <ul>
-                <li>Angular's directive compilation phase has three customizable steps: the compile function and the pre- and post-link functions.</li>
-                <li>In relation to the scope tree the compile and pre-link functions execute in a pre-order traversal and the post-links execute in a post-order traversal</li>
-                <li>So on the pre-link, we set up event listeners, on the post-link, we fire events.</li>
-              </ul>
-            </div>
-            <div class="col-xs-6">
-              <img src="img/scopes.svg" />
-              <em><small>Any time a post-link fires, that scope and all of its ancestors have already fired their pre-links</small></em>
-            </div>
-          </div>
-        </section>
-
-
-        <section>
-          <h2>The result</h2>
-          <div class='row slide-content'>
-            <div class="col-xs-6" style="font-size: 30px;">
-              <ul>
-                <li>Since Angular's scope hierarchy maps to Famo.us's render tree hierarchy, this lets us write library directives that create Famo.us's render tree components</li>
-                <li>This has turned out to be an excellent use of Angular's directives to extend the vocabulary of HTML</li>
-                <li>Famo.us/Angular's directives are essentially an HTML DSL for Famo.us</li>
-              </ul>
-            </div>
-            <div class="col-xs-6">
-              <ul>
-                <li>For example, this Famo.us code:</li>
-                <li><pre><code>
-var myView = new View();
-var mySurface = new Surface();
-mySurface.setContent("<div>I'm a surface</div>");
-myView.add(mySurface);
-                </code></pre></li>
-                <li>looks like this in Famo.us/Angular:</li>
-                <li><pre><code>
-<fa-view>
-  <fa-surface>
-    <div>I'm {{data.bound}}</div>
-  </fa-surface>
-</fa-view>
-                </code></pre></li>
-                <p><small><em>Notice how easy it is to databind!</em></small></p>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-				
-        <section>
-          <h2>Why would I want to use HTML?</h2>
-          <div class='row slide-content'>
-            <div class="col-xs-12" style="font-size: 30px;">
-              <ul>
-                <li>It makes it extremely easy to integrate Famo.us with any existing HTML or Angular apps.</li>
-                <li>It allows you to use Angular's data-binding within Famo.us components.</li>
-                <li>It encourages a clean architectural separation of concerns (view layer.)</li>
-                <li>It allows you to use custom directives (pre-existing, third-party, or new ones) inside of your Famo.us apps</li>
-                <li>And of course you get the rest of the benefits of Angular, like testability, organization, and streamlined data management.</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-
-        <section>
-          <h2>What about performance?</h2>
-          <div class='row slide-content'>
-            <div class="col-xs-12" style="font-size: 30px;">
-              <ul>
-                <li>Performance was a top priority in designing the integration.</li>
-                <li>In the single-threaded land of JavaScript, we need to be extra careful: any synchronous, thread-blocking code that runs longer than .0167 (1/60) seconds will stutter Famo.us animations</li>
-                <li>Unfortunately, Angular's digest cycle can be "hungry..." (get it?)</li>
-                <li>Requiring digests to reflect changes in Famo.us state was a non-starter</li>
-                <li>We needed to find a way to decouple Angular's digest cycle from Famo.us's render cycle.</li>  
-              </ul>
-            </div>
-          </div>
-        </section>
-
-
-        <section>
-          <h2>Decouple all the cycles!</h2>
-          <div class='slide-content' style='margin-top: 10px;'>
-            <div class="row">
-              <div class="col-xs-2">&nbsp;</div>
-              <div class="col-xs-8">
-                <img src="img/cycles.svg" />
-              </div>
-            </div>
-            <div class="row" style="font-size: 24px;">
-              <div class="col-xs-6">
-                <ul>
-                  <li>Our approach to decoupling Angular's digest cycle from Famo.us's render cycle was two-pronged:
-                    
-                  </li>
-                </ul>
-              </div>
-              <div class="col-xs-6">
-                <ol>
-                  <li>Use Angular's $parse to create functions that get bound directly to Famo.us Modifiers</li>
-                  <li>Enforce a <strong>unidirectional flow</strong> from Angular to Famo.us so that Famo.us doesn't incur side-effects (digests) during its rendering.</li>
-                </ol>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <h2>So what can I do with Famo.us/Angular?</h2>
-          <div class='row slide-content'>
-            <div class="col-xs-12" style="font-size: 30px;">
-              <ul>
-                <li>You can build awesome apps!</li>
-                <li>Famo.us takes the ceiling off of web animations and lets you design and build for interaction.</li>
-                <li>Angular gives you testability, structure, data-binding, and a rich ecosystem of components.</li>
-                <li>Famo.us/Angular lets you bring them both together, passing into/out of Famo.us containers anywhere in your app.</li>
-                <li>Since Famo.us/Angular compiles to Famo.us, this integration provides a portal from Angular to Famo.us even if Famo.us makes more radical steps into the future (mixed-mode WebGL and DOM, native GL?)</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-
-        <section>
-          <h2>How do <em>I</em> get started?</h2>
-          <div class='row slide-content'>
-            <div class="col-xs-12" style="font-size: 30px;">
-              <ul>
-                <li>
-                Download the starter kit:  <a href="http://code.famo.us/famous-angular/latest/famous-angular-starter-kit.zip?src=google-slide-deck">http://code.famo.us/famous-angular/latest/famous-angular-starter-kit.zip</a></li>
-                <li>
-                or install with Bower:  bower install famous-angular
-                </li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <h2>And how can I contribute?</h2>
-          <div class='row slide-content'>
-            <div class="col-xs-12" style="font-size: 30px;">
-              <ul>
-                <li>The simplest way to show your support is just to <a href="https://github.com/famous/famous-angular">give a Github star!</a> (and while you're at it, <a href="https://github.com/famous/famous">give one to Famo.us</a>, too!)</li>
-                <li>We also welcome code contributions.</li>
-                <li><a href="https://www.pivotaltracker.com/n/projects/1119890">Our roadmap is public</a>, and anyone is welcome to jump on and claim a task.</li>
-                <li>Email <a href="mailto:famous-angular@thomasstreet.com">famous-angular@thomasstreet.com</a> if you'd like to get an official account on the tracker.</li>
-                <li>If you're interested in improving your open source portfolio, this is a great opportunity!</li>
-                <li>Contribution guidelines: <a href="https://github.com/Famous/famous-angular/blob/master/CONTRIBUTING.md">https://github.com/Famous/famous-angular/blob/master/CONTRIBUTING.md</a></li>
-              </ul>
-            </div>
-          </div>
-        </section>
 
         <section>
           <h2>Resources</h2>
