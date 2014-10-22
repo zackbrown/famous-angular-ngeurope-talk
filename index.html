@@ -4,9 +4,9 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Famo.us/Angular:  A Case Study of AngularJS as a Framework for Frameworks</title>
+    <title>Famo.us/Angular:  </title>
 
-		<meta name="description" content="Famo.us is a newcomer on the web framework scene.  It allows developers to create high performance, cross-platform apps with first-class animations and interactions, but it takes an approach that’s very different from traditional HTML and CSS.  While Famo.us shines as a rendering engine, it is not an MVC.  On its own it can lack structure, testability, and streamlined data management.  AngularJS, on the other hand, handles each of these very well.  This talk describes the technical challenges and considerations of integrating these two seemingly orthogonal yet complementary libraries, while highlighting AngularJS’s ability to be a “framework for frameworks.”">
+		<meta name="description" content="Famo.us/Angular slide deck presented by Zack Brown from Thomas Street at ng-europe">
 		<meta name="author" content="Zack Brown">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -14,17 +14,20 @@
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-
-
-
 		<!-- For grid -->
 		<link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css">
 		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/theme/solarized.css" id="theme">
+    <link rel="stylesheet" href="css/theme/solarized.css" id="theme">
+		<link rel="stylesheet" href="bower_components/famous-angular/dist/famous-angular.min.css">
+
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/famous/dist/famous-global.min.js"></script>
+    <script src="bower_components/famous-angular/dist/famous-angular.js"></script>
+    <script src="js/slider-demo.js"></script>
+
 
 		<!-- For syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
-
 
 		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
 		<script>
@@ -48,13 +51,13 @@
       ga('send', 'pageview');
     </script>
 
+
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
 	</head>
 
 	<body>
-
 
 		<div class="reveal">
 
@@ -69,7 +72,7 @@
 			<div class="slides">
 				<section>
 					<h1>Famo.us/Angular</h1>
-					<h4 style="margin-top: 20px;">A Case Study of AngularJS as a Framework for Frameworks</h4>
+					<h4 style="margin-top: 20px;">Animate Imperatively for a More Interactive Web</h4>
 					<p style="margin-top: 280px;">            <a href="https://github.com/Famous/famous-angular">https://github.com/Famous/famous-angular</a>
           </p>
           <p>
@@ -80,189 +83,228 @@
 				</section>
 
 				<section>
-					<h2>What is Famo.us?</h2>
-					<div class='row slide-content'>
-						<div class="col-xs-6">
-							<ul>
-								<li>Open source web rendering engine</li>
-								<li>Lets you build high-performance, cross-platform animations, imperatively</li>
-								<li>Focuses on <em>interaction</em> and lets developers build web apps that respond to user input on the same level as native mobile apps.</li>
-							</ul>
-						</div>
-						<div class="col-xs-6">
-							<img src="img/famous-parchment.svg" class="no-border" style="width: 250px; margin-top: 45px;" />
-						</div>
-					</div>
-				</section>
-
-
-				<section>
-					<h2>What is Famo.us? (cont.)</h2>
-					<div class='row slide-content'>
-						<div class="col-xs-6">
-							<div style="margin-top: 175px;">
-								<strong>Demo: 'flickrous'</strong>
-								<p><small>(Code available at <a href="https://github.com/zackbrown/flickrous">https://github.com/zackbrown/flickrous</a>)</small></p>
-								<p><small><em>This demo is designed for touch input.  If viewing on a desktop browser, try turning on touch emulation in the console</em></small></p>
-							</div>
-              <div style="margin-top: 30px;">
-              <small>
-              Also, Famebook Paper (touch device or touch emulation required)  <a href="http://demo.famo.us/paper">http://demo.famo.us/paper</a></small>
+					<h2>Expectations</h2>
+					<div class='slide-content'>
+            <div class="row">
+  						<div class="col-xs-3">
+  							<img src="img/gifs/animations.gif" />
+  						</div>
+              <div class="col-xs-3">
+                <img src="img/gifs/aminacia.gif" />
               </div>
-						</div>
-						<div class="col-xs-6">
-							<iframe style="border: 3px solid #FFFFFA" width="320" height="568" src="embed/flickrous/index.html"></iframe>
-						</div>
-					</div>
+              <div class="col-xs-3">
+                <img src="img/gifs/closemenu.png" />
+              </div>
+              <div class="col-xs-3">
+                <img src="img/gifs/dribble.gif" />
+              </div>
+            </div>
+            <div class="row fragment">
+              <div class="col-xs-3">
+                <img src="img/gifs/gif2.gif" />
+              </div>
+              <div class="col-xs-3">
+                <img src="img/gifs/gif_cuatro_o_cinco.gif" />
+              </div>
+              <div class="col-xs-3">
+                <img src="img/gifs/gif_shot4.gif" />
+              </div>
+              <div class="col-xs-3">
+                <img src="img/gifs/motion-proto-rally-interactive.gif" />
+              </div>
+            </div>
+            <div class="row fragment">
+              <div class="col-xs-3">
+                <img src="img/gifs/pull-down.gif" />
+              </div>
+              <div class="col-xs-3">
+                <img src="img/gifs/shot.png" />
+              </div>
+              <div class="col-xs-3">
+                <img src="img/gifs/ui8-wireframekit.gif" />
+              </div>
+              <div class="col-xs-3">
+                <img src="img/gifs/ux_idea.jpg" />
+              </div>
+            </div>
+
+
+          </div>
+						
+				</section>
+
+
+				<section>
+					<h2>CSS</h2>
+          <div class='row slide-content'>
+            <div class="col-xs-6">
+              <ul>
+                <li>We simply can't do everything with CSS that we can do with native mobile.</li>
+                <li>When things get complex, animations/interactions with CSS are <strong>either extremely hard</strong> or <strong>outright impossible.</strong></li>
+                <li><small>(and that's just for authoring: consider design changes, refactors, and maintenance.)</small></li>
+                <li>What we hit is a "Declarative Ceiling."</li>
+              </ul>
+            </div>
+            <div class="col-xs-6">
+              <pre class="no-border">
+                <code class="right-column-code">
+              .element-animation{
+                animation: animationFrames linear 4s;
+                animation-iteration-count: 1;
+                transform-origin: ;
+                -webkit-animation: animationFrames linear 4s;
+                -webkit-animation-iteration-count: 1;
+                -webkit-transform-origin: ;
+                -moz-animation: animationFrames linear 4s;
+                -moz-animation-iteration-count: 1;
+                -moz-transform-origin: ;
+                -o-animation: animationFrames linear 4s;
+                -o-animation-iteration-count: 1;
+                -o-transform-origin: ;
+                -ms-animation: animationFrames linear 4s;
+                -ms-animation-iteration-count: 1;
+                -ms-transform-origin: ;
+              }
+
+              @keyframes animationFrames{
+                0% {
+                  left:-299px;
+                  top:-196px;
+                  opacity:1;
+                  transform:  rotate(-1deg) scaleX(1) scaleY(1) ;
+                }
+                50% {
+                  left:-137px;
+                  top:25px;
+                  transform:  rotate(976deg) scaleX(0.77) scaleY(3.179999999999998) ;
+                }
+                100% {
+                  left:200px;
+                  top:0px;
+                  opacity:1;
+                  transform:  rotate(24deg) scaleX(3.52) scaleY(3.179999999999998) ;
+                }
+              }
+
+              @-moz-keyframes animationFrames{
+                0% {
+                  left:-299px;
+                  top:-196px;
+                  opacity:1;
+                  -moz-transform:  rotate(-1deg) scaleX(1) scaleY(1) ;
+                }
+                50% {
+                  left:-137px;
+                  top:25px;
+                  -moz-transform:  rotate(976deg) scaleX(0.77) scaleY(3.179999999999998) ;
+                }
+                100% {
+                  left:200px;
+                  top:0px;
+                  opacity:1;
+                  -moz-transform:  rotate(24deg) scaleX(3.52) scaleY(3.179999999999998) ;
+                }
+              }
+
+              @-webkit-keyframes animationFrames {
+                0% {
+                  left:-299px;
+                  top:-196px;
+                  opacity:1;
+                  -webkit-transform:  rotate(-1deg) scaleX(1) scaleY(1) ;
+                }
+                50% {
+                  left:-137px;
+                  top:25px;
+                  -webkit-transform:  rotate(976deg) scaleX(0.77) scaleY(3.179999999999998) ;
+                }
+                100% {
+                  left:200px;
+                  top:0px;
+                  opacity:1;
+                  -webkit-transform:  rotate(24deg) scaleX(3.52) scaleY(3.179999999999998) ;
+                }
+              }
+
+              @-o-keyframes animationFrames {
+                0% {
+                  left:-299px;
+                  top:-196px;
+                  opacity:1;
+                  -o-transform:  rotate(-1deg) scaleX(1) scaleY(1) ;
+                }
+                50% {
+                  left:-137px;
+                  top:25px;
+                  -o-transform:  rotate(976deg) scaleX(0.77) scaleY(3.179999999999998) ;
+                }
+                100% {
+                  left:200px;
+                  top:0px;
+                  opacity:1;
+                  -o-transform:  rotate(24deg) scaleX(3.52) scaleY(3.179999999999998) ;
+                }
+              }
+
+              @-ms-keyframes animationFrames {
+                0% {
+                  left:-299px;
+                  top:-196px;
+                  opacity:1;
+                  -ms-transform:  rotate(-1deg) scaleX(1) scaleY(1) ;
+                }
+                50% {
+                  left:-137px;
+                  top:25px;
+                  -ms-transform:  rotate(976deg) scaleX(0.77) scaleY(3.179999999999998) ;
+                }
+                100% {
+                  left:200px;
+                  top:0px;
+                  opacity:1;
+                  -ms-transform:  rotate(24deg) scaleX(3.52) scaleY(3.179999999999998) ;
+                }
+              }
+                  </code>
+                </pre>
+                <p style="margin-top: -30px;">
+                <small>(Verbose) declarative CSS from a CSS animation generator (cssanimate.com)</small>
+                </p>
+            </div>
 				</section>
 
 
 
+        <section>
+          <h2>CSS vs. Rich Animations</h2>
+          <div class='row slide-content'>
+            <div class="col-xs-6">
+              <h4>What's hard?</h4>
+              <ul>
+                <li>Complex/orchestrated animations/timelines</li>
+                <li>Knowing when transitions are done</li>
+                <li>Halting transitions</li>
+              </ul>
+            </div>
+            <div class="col-xs-6">
+              <h4>What's impossible?</h4>
+              <ul>
+                <li>Conditions, control flow</li>
+                <li>Non-determinism, randomness</li>
+                <li>Mathematical operations, computed physics</li>
+                <li>Responding to non-trivial user input (e.g. touch position)</li>
+                <li><strong>All of these are begging for Turing-completeness that CSS simply doesn't offer.</strong><br><br><small>(nor should it! we have JavaScript.)</small></li>
+              </ul>
+            </div>
+          </div>
+        </section>  
+
 				<section>
-					<h2>Why imperative?</h2>
+					<h2>Use the Best Tool for the Job</h2>
 					<div class='row slide-content'>
 						<div class="col-xs-6">
 							<ul>
-								<li>There are always trade-offs between imperative and declarative</li>
-								<li>Imperative code tends to be more expressive (usually Turing complete,) e.g. JavaScript</li>
-								<li>Declarative code tends to be simpler to understand and maintain, but generally has limits on expressiveness (e.g. HTML, CSS)</li>
-							</ul>
-						</div>
-						<div class="col-xs-6">
-							<pre class="no-border">
-								<code class="right-column-code">
-.element-animation{
-  animation: animationFrames linear 4s;
-  animation-iteration-count: 1;
-  transform-origin: ;
-  -webkit-animation: animationFrames linear 4s;
-  -webkit-animation-iteration-count: 1;
-  -webkit-transform-origin: ;
-  -moz-animation: animationFrames linear 4s;
-  -moz-animation-iteration-count: 1;
-  -moz-transform-origin: ;
-  -o-animation: animationFrames linear 4s;
-  -o-animation-iteration-count: 1;
-  -o-transform-origin: ;
-  -ms-animation: animationFrames linear 4s;
-  -ms-animation-iteration-count: 1;
-  -ms-transform-origin: ;
-}
-
-@keyframes animationFrames{
-  0% {
-    left:-299px;
-    top:-196px;
-    opacity:1;
-    transform:  rotate(-1deg) scaleX(1) scaleY(1) ;
-  }
-  50% {
-    left:-137px;
-    top:25px;
-    transform:  rotate(976deg) scaleX(0.77) scaleY(3.179999999999998) ;
-  }
-  100% {
-    left:200px;
-    top:0px;
-    opacity:1;
-    transform:  rotate(24deg) scaleX(3.52) scaleY(3.179999999999998) ;
-  }
-}
-
-@-moz-keyframes animationFrames{
-  0% {
-    left:-299px;
-    top:-196px;
-    opacity:1;
-    -moz-transform:  rotate(-1deg) scaleX(1) scaleY(1) ;
-  }
-  50% {
-    left:-137px;
-    top:25px;
-    -moz-transform:  rotate(976deg) scaleX(0.77) scaleY(3.179999999999998) ;
-  }
-  100% {
-    left:200px;
-    top:0px;
-    opacity:1;
-    -moz-transform:  rotate(24deg) scaleX(3.52) scaleY(3.179999999999998) ;
-  }
-}
-
-@-webkit-keyframes animationFrames {
-  0% {
-    left:-299px;
-    top:-196px;
-    opacity:1;
-    -webkit-transform:  rotate(-1deg) scaleX(1) scaleY(1) ;
-  }
-  50% {
-    left:-137px;
-    top:25px;
-    -webkit-transform:  rotate(976deg) scaleX(0.77) scaleY(3.179999999999998) ;
-  }
-  100% {
-    left:200px;
-    top:0px;
-    opacity:1;
-    -webkit-transform:  rotate(24deg) scaleX(3.52) scaleY(3.179999999999998) ;
-  }
-}
-
-@-o-keyframes animationFrames {
-  0% {
-    left:-299px;
-    top:-196px;
-    opacity:1;
-    -o-transform:  rotate(-1deg) scaleX(1) scaleY(1) ;
-  }
-  50% {
-    left:-137px;
-    top:25px;
-    -o-transform:  rotate(976deg) scaleX(0.77) scaleY(3.179999999999998) ;
-  }
-  100% {
-    left:200px;
-    top:0px;
-    opacity:1;
-    -o-transform:  rotate(24deg) scaleX(3.52) scaleY(3.179999999999998) ;
-  }
-}
-
-@-ms-keyframes animationFrames {
-  0% {
-    left:-299px;
-    top:-196px;
-    opacity:1;
-    -ms-transform:  rotate(-1deg) scaleX(1) scaleY(1) ;
-  }
-  50% {
-    left:-137px;
-    top:25px;
-    -ms-transform:  rotate(976deg) scaleX(0.77) scaleY(3.179999999999998) ;
-  }
-  100% {
-    left:200px;
-    top:0px;
-    opacity:1;
-    -ms-transform:  rotate(24deg) scaleX(3.52) scaleY(3.179999999999998) ;
-  }
-}
-								</code>
-							</pre>
-							<p style="margin-top: -30px;">
-							<small>(Verbose) declarative CSS from a CSS animation generator (cssanimate.com)</small>
-							</p>
-						</div>
-					</div>
-				</section>
-
-				<section>
-					<h2>Why imperative? (cont.)</h2>
-					<div class='row slide-content'>
-						<div class="col-xs-6">
-							<ul>
-								<li>When it comes to this divide, Famo.us's philosophy is that <em>interactive animations are fundamentally better suited to imperative code</em></li>
+								<li></li>
 								<li>The present-day landscape of mobile apps has spoiled users into expecting richly responsive experiences.</li>
 								<li>Famo.us lets you design and build apps in the browser as if you were building for a mobile device.</li>
 							</ul>
@@ -289,6 +331,32 @@ sync.on('update', function(data){
 						</div>
 					</div>
 				</section>
+
+        <section>
+          <div  ng-app="slider-demo" class="row slide-content">
+            <fa-app id="slider-app" style="height: 500px;" ng-controller="SliderCtrl">
+
+              <fa-modifier fa-size="[getDragPosition()[0], undefined]">
+                <fa-container-surface fa-options="{properties: {overflow: 'hidden'}}">
+                  <fa-modifier fa-size="[getContainerWidth(), undefined]">
+                    <fa-modifier ng-repeat="bar in bars" fa-translate="getTranslate(bar, $index)" 
+                    fa-size="getSize(bar, $index)" fa-origin="getOrigin($index)" fa-align="getOrigin($index)" fa-scale="getScale(bar, $index)">
+                      <fa-surface fa-background-color="getBackgroundColor(bar, $index)"></fa-surface>
+                    </fa-modifier>
+                  </fa-modifier>
+                </fa-container-surface>
+              </fa-modifier>
+
+              </fa-container-surface>
+              <fa-draggable id="draggable" fa-options="{yRange: [0,0], xRange: [0, getContainerWidth() - 10]}" fa-pipe-from="scrollHandler">
+
+                <fa-surface fa-pipe-to="scrollHandler" fa-size="[10, undefined]" fa-background-color="'#666666'">
+                </fa-surface>
+              </fa-draggable>
+              <!-- </fa-modifier> -->
+            </fa-app>
+          </div>
+        </section> 
 
 				<section>
 					<h2>So how does Famo.us work?</h2>
@@ -609,7 +677,8 @@ myView.add(mySurface);
 		</div>
 
 		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+
 
 		<script>
 

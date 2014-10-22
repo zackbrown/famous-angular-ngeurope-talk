@@ -1,0 +1,77 @@
+33753236643 
+
+
+Title:  Animate imperatively for a more interactive web
+Title:  
+(The domain isn't limited to "time")
+
+
+0. Discuss UX expectations in apps these days, how animations have and haven’t been able to meet these expectations in HTML
+
+
+
+
+  Mobile is big.
+    Want the web to win.  (Famo.us)
+      What's holding it back?
+        Performance
+        Interactivity
+          Subtle, but extremely important.
+
+
+  0.0.1: Show a handful of interactions (Material design, Android pull-down)
+
+  0.0.2: CSS animations can do some cool stuff.  Where they fall short is *interactivity.*  How can I make a box bounce 
+
+  0.1. Discuss imperative/declarative trade-off [quickly describe imperative/declarative.]  The goal when writing any code is “simplicity!”  And the answer is ‘balance.’  Angular handles this balance very well:  handle your content declaratively, handle your controller logic imperatively, hook the two together
+
+
+  Tools
+    Venn diagram:  Mobile performance | Expressive interactivity
+      Mobile:
+        CSS transitions
+      Expressive interactivity
+        
+
+  0.2 Bold claim:  animations and interactions are fundamentally better suited to imperative than to declarative descriptions.  Turing completeness, ability to respond to side effects like user input, ability to map user input to multi-dimensional, non-deterministic, or complex outputs.  Consider the Android pull-down bar (show demo).  In fact, consider native apps in general:  why is it hard to achieve native-feeling apps with web technologies?  There are two pieces, 1. is performance, but 2. and in my opinion even more importantly, is that ability to *interact* with the user:  to do cool stuff based on touch positions
+
+  0.2.1 Problem with this in the past is that it’s very difficult to make JS animations performant — ESPECIALLY on mobile.
+
+  0.2.2 Enter Famo.us:  found a way to make imperative, fine-grained animations performant, across devices.
+    0.2.2.1 Show Famo.us University, simple animation examples:  show sync
+    0.2.2.2 The cost?  It starts from the ground up, using its own render-tree-compositing engine to output values to CSS Matrix3D properties.  This achieves behavior in the browser that’s a lot more like what we get in the worlds of 3D graphics, OpenGL, and DirectX.  But this means that it can be hard, initially, to integrate with existing standards and technologies.
+    0.2.2.3 The benefits?  Performant, imperative interactions.  Unlimited expressiveness.  What's more, the upcoming version of Famo.us "MixedMode" is integrating deeply with WebGL, allowing you to create and manipulate, say, a GL Sphere just as easily as you can create and manipulate a div.
+
+  0.2.3 How can I use all that cool stuff in an existing app, or to make use of standards I'm already familiar with?  Famo.us/Angular!
+
+
+
+1.0 Step through the demo site.  You can load this live at http://famo.us/angular!
+  1.0.1 Note that these are ui-router ui-views:  the introductory animations are triggered by ngAnimate 'enter' events
+1.1 Intro slide
+  1.1.1 Notice the interactivity with the page scroll.
+1.2 Render tree
+1.3 Data binding
+1.4 Directives
+1.5 Organization
+1.6 Integration
+
+
+2.0 Responsiveness.
+  2.1 Again, balance declarative and imperative. Purely imperative?  Lots of branching logic.  Purely declarative?  Back to where we are in CSS: fighting against the grain when we want to be interactive.
+  2.1.1 Plus, separate concerns.
+  2.1.2 Current state of Famo.us/Angular requires a lot of inline attributes.  As a side project, I've been working on this open-source library I've been calling Sheets.
+    2.1.2.1 Sheets at its core is a way to functional-reactively bind a "function" to a DOM element.
+    2.1.2.2 It's built it to look like CSS.  Optional media query, then selector, then field, then value.
+    2.1.2.3 Essentially, it's a way to write CSS but with *imperative* code.
+            It's very much like an Angular directive, but assigned by selector instead of inlined in a template.  Its uses are totally open-ended, but I think it's very well suited for decorating *behavior* (e.g. animations)
+    2.1.2.4 Show hello world app and code
+    2.1.2.5 We dog-fooded it on the new Famo.us/Angular site and it has actually worked quite well.
+
+
+
+1. Show template code, show controller code:  make sure to show one example of opacity + one of Transform
+
+2.  Show Android pull-down bar example?
+
+3.  Adjust examples to show more interesting transitions between states?  Possible to refactor to show initial transitions hooked into scroll timeline?
