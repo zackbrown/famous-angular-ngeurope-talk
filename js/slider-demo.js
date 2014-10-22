@@ -42,6 +42,18 @@ module.controller('SliderCtrl', function($scope, $famous, $timeout, $timeline){
     return Easing.inQuad(t.get());
   }
 
+  $scope.getArrowRotate = function(){
+    return t.get() * Math.PI;
+  };
+
+  $scope.getArrowOpacity = function(){
+    return 1-Easing.outQuad(t.get());
+  };
+
+  $scope.getPullOpacity = function(){
+    return 1 - Easing.outQuint(t.get());
+  };
+
   $scope.getTranslate = function(bar, index){
     var x = $scope.getSize()[0] * index;
     return [x, 0, 5];

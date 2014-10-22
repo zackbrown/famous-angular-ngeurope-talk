@@ -83,7 +83,7 @@
 				</section>
 
 				<section>
-					<h2>User Experience Expectations</h2>
+					<h2>Mobile:  User Experience Expectations</h2>
 					<div class='slide-content'>
             <div class="row">
   						<div class="col-xs-3">
@@ -135,7 +135,7 @@
 
 
         <section>
-          <h2>Why hasn't Web taken over the (native) world?</h2>
+          <h2>Why hasn't Web taken over the Mobile World?</h2>
           <div class='row slide-content'>
             <div class="col-xs-6" style="margin-top: 100px;">
               <h4>A few barriers:</h4>
@@ -367,6 +367,13 @@
 
                 <fa-surface fa-pipe-to="scrollHandler" fa-size="[10, undefined]" fa-background-color="'#666666'">
                 </fa-surface>
+                <fa-modifier fa-align='[0, .5]' fa-origin="[.5, .5]" fa-opacity="getArrowOpacity()" fa-translate="[5, 7, 0]" fa-transform-order="['rotate', 'translate']" fa-rotate="[0, 0, getArrowRotate()]">
+                  <fa-surface fa-size="[true, true]" fa-pipe-to="scrollHandler">
+                    <small style="pointer-events: none; font-weight: bold; font-size: 12px;">
+                      &#9654;
+                    </small>
+                  </fa-surface>
+                </fa-modifier>
               </fa-draggable>
             </fa-app>
           </div>
@@ -379,103 +386,64 @@
               <h3>Enter: Famo.us</h3>
 							<ul>
 								<li>Famo.us's core value proposition is cross-platform, high-performance, JavaScript-driven animations.</li>
-								<li>With the ability to achieve 60FPS animations across devices using JavaScript, we can finally knock out that final barrier to Web-World-Domination: Rich Interactivity</li>
+								<li>With the ability to achieve 60FPS animations across devices using JavaScript, we can finally knock out that final barrier to Web-World-Domination: <strong>Rich Interactivity</strong></li>
 							</ul>
 						</div>
-						<div class="col-xs-6 fragment">
-              <h3>
-							<img src="img/scene-graph.png" style="height: 500px;" />
-							<p><small><em>Scene graph</em></small></p>
-						</div>
-					</div>
-				</section>
-
-
-
-				<section>
-					<h2>So how does Famo.us work? (cont.)</h2>
-					<div class='row slide-content'>
-						<div class="col-xs-12">
-							<ul>
-								<li>Famo.us makes use of CSS3’s Matrix3D transforms, which gives it its GPU-accelerated performance</li>
-                <li>Famo.us syncs ticks of its Engine to requestAnimationFrame to keep things smooth (ideally, 60 FPS)</li>
-								<li>On each tick, it composites its scene graph using some linear algebra goodness to a set of individually positionable outputs</li>
-								<li>This is extra cool because though it’s focused on browsers now, Famo.us is agnostic of its output layer (DOM, WebGL, ...native?!)</li>
-							</ul>
-						</div>
-					</div>
-				</section>
-
-
-				<section>
-					<h2>Famo.us is 100% JavaScript</h2>
-					<div class='row slide-content'>
-						<div class="col-xs-8">
-							<ul>
-								<li>As in, no HTML</li>
-								<li>So what about MVC?  What about "Views" at all?</li>
-								<li>DOM is a great solution for representing hierarchical UIs (with HTML)</li>
-								<li>But Famo.us doesn't use the DOM:  it has its own vocabulary of Surfaces and Views and Modifiers instead of Divs and Spans and Ps</li>
-							</ul>
-						</div>
-            <div class="col-xs-1">
-              &nbsp;
+            <div class="col-xs-6">
+              <img style="border: none; box-shadow: none; background: none;" src="img/famous-parchment.svg" />
             </div>
-						<div class="col-xs-3">
-							<img class="no-border" src="img/javascript-logo.png" />
-						</div>
+          </div>
+
+				</section>
+
+
+				<section>
+					<h2>Famo.us:  a fresh take on rendering</h2>
+					<div class='slide-content'>
+            <div class="row">
+  						<div class="col-xs-12" >
+              <ul style="text-align: left">
+              <li>Famo.us starts from the ground up, using its own render-tree-compositing engine to output values to CSS Matrix3D properties.</li>
+              <li>This achieves behavior in the browser that’s a lot more like what we get in the worlds of 3D graphics, OpenGL, and DirectX.</li></ul>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-6 fragment">
+                <h4>The cost?</h4>
+  							<ul>
+                  <li>It can be hard, initially, to integrate with existing standards and technologies.</li>
+  							</ul>
+  						</div>
+              <div class="col-xs-6 fragment">
+                <h4>The benefits?</h4>
+                <ul>
+                  <li>Performant, imperative interactions.</li>
+                  <li>Unlimited expressiveness.</li>
+                  <li>Coming soon:  Deep WebGL integration</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-xs-12 fragment">
+              <h5>How can I easily use all that cool stuff in an existing app, alongside other standards that I'm already familiar with? <strong class="fragment">(drum roll...)</strong></h5>
+            </div>
 					</div>
 				</section>
 
+
 				<section>
-					<h2>So how can Famo.us and Angular get along?</h2>
+					<h1>Famo.us/Angular</h1>
+				</section>
+
+				<section>
+					<h2>Responsiveness</h2>
 					<div class='row slide-content'>
 						<div class="col-xs-12">
 							<ul>
-								<li>Without HTML as common ground, at first glance AngularJS and Famo.us seem like incompatible approaches to buiding web apps</li>
-								<li>Angular builds off of existing standards and enriches them, e.g. by bringing dynamic databinding to the DOM</li>
-								<li>Famo.us says “well, eff that, let’s try things a new way.”</li>
-								<li>This is controversial, of course:  compelling to many, and upsetting to many others.  The technical trade-offs are similarly extreme.</li>
 							</ul>
 						</div>
 
 					</div>
 				</section>
-
-
-				<section>
-					<h2>A quick bit of history</h2>
-					<div class='row slide-content'>
-						<div class="col-xs-12">
-							<ul>
-								<li>In partnership with <a href="http://weareroyale.com">Royale</a>, Thomas Street sent me into Famo.us's private beta program back in March.  At the time, Angular was a bad word</li>
-								<li>As an Angular fan, I decided to keep my head down and just learn Famo.us to see what the fuss was about</li>
-								<li>As I started to wrap my head around Famo.us,  I started to get an idea about how an integration might work.</li>
-								<li>At Thomas Street, we were able to put together a proof-of-concept and get Famo.us’s support to continue building the project.</li>
-								<li>Over the last 5 months, Famo.us has actually become very interested in AngularJS.</li>
-							</ul>
-						</div>
-					</div>
-				</section>
- 
-
-				<section>
-					<h2>So what would an ideal integration look like?</h2>
-					<p>When getting started, we outlined a handful of requirements</p>
-					<div class='row slide-content'>
-						<div class="col-xs-12">
-							<ul>
-								<li>Maintain Famo.us’s rendering performance</li>
-								<li>Support Angular’s data-binding</li>
-								<li>Support using existing Angular components (incl. third-party)</li>
-								<li>Support using existing Famo.us components (incl. third-party)</li>
-								<li>Minimize conceptual overhead by leaning on each library’s conventions when possible</li>
-							</ul>
-						</div>
-					</div>
-				</section>
-
-
 
         <section>
           <h2>Resources</h2>
