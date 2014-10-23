@@ -141,7 +141,8 @@
               <h4>A few barriers:</h4>
               <ul>
                 <li>Performance
-                <br><small style="color: #449444">This is getting better</small></li>
+                <br><small style="color: #449444">This is getting better
+                <br><span style="color: #944444">But can still be tricky</span></small></li>
                 <li>Ease of wrapping<br><small style="color: #449444">This is getting better</small></li>
                 <li>Rich Interactivity<br><small style="color: #944444">CSS falls short<br> JavaScript traditionally sacrifices performance</small></li>
               </ul>
@@ -354,9 +355,6 @@
                     fa-size="getSize(bar, $index)" fa-origin="getOrigin($index)" fa-align="getOrigin($index)" fa-scale="getScale(bar, $index)">
                       <fa-surface fa-background-color="getBackgroundColor(bar, $index)"></fa-surface>
                     </fa-modifier>
-
-
-
                     
                   </fa-modifier>
                 </fa-container-surface>
@@ -435,28 +433,130 @@
 				</section>
 
 				<section>
-					<h2>Responsiveness</h2>
+					<h2>A New Feature</h2>
 					<div class='row slide-content'>
-						<div class="col-xs-12">
+						<div class="col-xs-6">
 							<ul>
+                <li>If you've worked with F/A before, you know there is a lot of inlining in the HTML.  These attributes are managed by Angular, which is how they get translated to Famo.us.</li>
+                <li>This feels analogous to inlining a bunch of CSS attributes.</li>
+                <li>But these are <strong>AngularJS data-bindings</strong> that we're inlining&mdash;JavaScript expressions.</li>
+                <li>There's no declarative "style sheet" for JavaScript, is there?
+                </li>
 							</ul>
 						</div>
+            <div class="col-xs-6">
+              <img src="img/messy-code.png" />
+              <small><em>An unkempt Famo.us/Angular template</em></small>
+            </div>
 
 					</div>
 				</section>
+
+        <section>
+          <h2>What about responsiveness?</h2>
+          <div class='row slide-content'>
+            <div class="col-xs-6">
+              <ul>
+                <li>We have to handle both different positions AND animation behaviors across responsive breakpoints.</li>
+                <li>We get the benefits of control flow, so you can use "if" statements in your animation logic... but... </li>
+                <li>This is something (declarative) CSS media queries handle really well.  If only we could put JavaScript functions in our CSS.
+                </li>
+                <li>
+                <em>But there <strong>are</strong> no "style sheets" for JavaScript... right?</em>
+                </li>
+              </ul>
+            </div>
+            <div class="col-xs-6">
+              <img src="img/media-query.png" />
+              <small><em>from Twitter Bootstrap</em></small>
+            </div>
+
+          </div>
+        </section>
+
+
+        <section>
+          <h2>What if we could...?</h2>
+          <div class='row slide-content'>
+            <div class="col-xs-6">
+              <ul>
+                <li>What if we could plop a JavaScript function into our CSS?</li>
+                <li>And use our "if"s and our "event.touch"s and our "Math.sin"s and our cool knowledge of physics?</li>
+                <li>Could this be an ideal balance of imperative and declarative...?</li>
+                <li class="fragment">Except for that piece about it living inside the CSS.  That's a little too crazy.</li>
+              </ul>
+            </div>
+            <div class="col-xs-6">
+              <img src="img/weird-css.png" />
+              <small><em>whoa dude</em></small>
+            </div>
+
+          </div>
+        </section>
+
+
+        <section>
+        <h2>Let's do it in JavaScript</h2>
+          <div class='row slide-content'>
+            <div class="col-xs-6">
+              <h3>Working name:  Sheets</h3>
+              <ul>
+                <li>In short, it's a way to bind <strong>functions</strong> to <strong>DOM elements,</strong> via <strong>Selectors</strong></li>
+                <li>It's like light-weight Angular directives&mdash;you can define your own <strong>fields</strong> and the logic for handling that field for a given element</li>
+                <li>And it's a lot like CSS in that it separates the template from its logic, using selectors as the link.  Bonus: media queries!</li>
+              </ul>
+            </div>
+            <div class="col-xs-6">
+              <img src="img/sheets-code.png" />
+              <small><em>Simple example of Sheets code.</em></small>
+            </div>
+          </div>
+        </section>
+
+
+        <section>
+          <h2>Famo.us/Angular site:  redux</h2>
+        </section>
+
+        <section>
+        <h2>Sheets</h2>
+          <div class='row slide-content'>
+            <div class="col-xs-12">
+            <ul>
+              <li>
+                It has turned out to be a great solution for responsiveness and concern separation in Famo.us/Angular
+              </li>
+              <li>
+                It's simple, powerful, and expressive&mdash;<strong>and completely independent from Famo.us/Angular</strong>&mdash;so I would love to see what other uses people come up with for it.
+              </li>
+              <li>It's young, but simple and stable.</li>
+              <li>
+                If anyone would like to help develop it, please swing by on github (github.com/zackbrown/sheets) or email me at zack@thomasstreet.com
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+      <h2>The Future of Famo.us/Angular</h2>
+      <div class="slide-content row">
+        <ul>
+          <li>We will be integrating with Angular 2, hopefully out of the gate as a first-class view-layer module.</li>
+          <li>Famo.us Mixed Mode is coming soon, a gigantic upgrade of Famo.us that cleans up the API, brings further performance optimization, and features WebGL integration</li>
+          <li>We will continue exploring ways to further the frontier of web interactivity&mdash;<strong>we want the web to win.</strong></li>
+        </ul>
+      </div>
+      </section>
 
         <section>
           <h2>Resources</h2>
           <div class='row slide-content'>
             <div class="col-xs-12" style="font-size: 30px;">
               <ul>
-                <li>This slide deck: <a href="http://thomasstreet.com/famous-angular-google">http://thomasstreet.com/famous-angular-google</a>
+                <li>This slide deck: <a href="http://thomasstreet.com/famous-angular-ngeurope">http://thomasstreet.com/famous-angular-ngeurope</a>
                 <li>Famo.us/Angular project page: <a href="https://famo.us/angular">https://famo.us/angular</a></li>
                 <li>Github repo: <a href="https://github.com/Famous/famous-angular">https://github.com/Famous/famous-angular</a></li>
-                <li>Examples: <a href="https://github.com/thomasstreet/famous-angular-examples">https://github.com/thomasstreet/famous-angular-examples</a></li>
-                <li>Starter Project: <a href="https://github.com/thomasstreet/famous-angular-starter">https://github.com/thomasstreet/famous-angular-starter</a></li>
-                <li>Flickrous Demo:  <a href="https://github.com/zackbrown/flickrous">https://github.com/zackbrown/flickrous</a></li>
-                <li>Famo.us Labs: email <a href="mailto:labs@famo.us">labs@famo.us</a></li>
                 <li>or email me <a href="mailto:zack@thomasstreet.com">zack@thomasstreet.com</a>
                 <p style="padding: 10px;"><small>or follow me on twitter! <a href="http://twitter.com/zackaboo">@zackaboo</a></small></p>
                 </li>
